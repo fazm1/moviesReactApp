@@ -5,6 +5,7 @@
     height: 50px; 
     
 }
+
 .watchlist{
     float: right;
     margin-top: -50px;
@@ -23,12 +24,16 @@
     height: 340px; 
     margin-top: 50px;  
     margin-left: 10px;
-    
     position: relative;
     display: inline-flex;
     margin-bottom: 20px;
-    
-    
+}
+.counterNav{
+    border-radius: 5px;
+    background-color: white;
+}
+.addToFav{
+    margin-left: 10px;
 }
 .movieImage{
     width: 150px;

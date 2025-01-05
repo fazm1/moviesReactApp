@@ -3,10 +3,9 @@ import MovieCard from "../components/movieCard";
 import axios from "axios";
 import "./pages.css";
 
-function MovieList() {
+function MovieList(props) {
+  const {handleAddToFav} = props;
   const [movies, setMovies] = useState();
-  const [favMovies, setFavMovies] = useState('');
-
   useEffect(() => {
     axios
       .get(
@@ -23,6 +22,7 @@ function MovieList() {
           <MovieCard 
             key={movie.id}
             movieItem={movie}
+            handleAddToFav={handleAddToFav}
           />
         ))}
       </div>
