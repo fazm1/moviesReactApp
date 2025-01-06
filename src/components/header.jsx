@@ -2,13 +2,22 @@ import { useSelector } from "react-redux";
 import "./components.css";
 import { Link } from "react-router";
 function Header() {
-   const counterVal = useSelector((state) => state.counter.value);
+  const counterVal = useSelector((state) => state.counter.value);
   return (
     <>
-    
       <div className="Navbar">
-        <Link to="/"><h2 className="logo">MovieApp</h2></Link>
-        <Link to="/watchlist"><span className="watchlist">watchlist <span className="counterNav">{counterVal}</span></span></Link>
+        <Link to="/">
+          <h2 className="logo">MovieApp</h2>
+        </Link>
+        <select name="lang" id="lang">
+          <option value="ar">EN</option>
+          <option value="en">AR</option>
+        </select>
+        <Link to="/watchlist">
+          <span className="watchlist">
+            watchlist <span className="counterNav">{counterVal}</span>
+          </span>
+        </Link>
       </div>
     </>
   );

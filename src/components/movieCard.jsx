@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 
 function MovieCard(props) {
-  const { movieItem, handleAddToFav } = props;
+  const { movieItem, handleAddToFav, favMovies } = props;
   const navigate = useNavigate();
   const handleClick = (id) => {
     navigate(`/moviedetails/${id}`);
   };
-
-  const [clicked, setClicked] = useState(false);
+  const clickedCards = useSelector((state) => state.counter.clickedId);
+  
+  const [clicked, setClicked] = useState(clickedCards.includes(movieItem.id));
   return (
     <>
       <div className="movieCard" key={movieItem.id}>
@@ -30,7 +31,6 @@ function MovieCard(props) {
                 movieItem.original_title,
                 movieItem.poster_path,
                 movieItem.release_date,
-                clicked
               );
             }}
           >

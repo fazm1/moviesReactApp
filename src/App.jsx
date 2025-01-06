@@ -1,21 +1,31 @@
-import { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-import MovieList from "./pages/MovieList";
-import MovieDetails from "./pages/MovieDetails";
-import NotFound from "./pages/NotFound";
-import Watchlist from "./pages/Watchlist";
-import Header from "./components/header";
+
+// import MovieList from "./pages/MovieList";
+// import MovieDetails from "./pages/MovieDetails";
+// import NotFound from "./pages/NotFound";
+// import Watchlist from "./pages/Watchlist";
+// import Header from "./components/header";
+
 import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment } from "./store/slices/counter";
+import { decrement, increment, clicked2, unmark } from "./store/slices/counter";
+
+const MovieList = React.lazy(() => import("./pages/MovieList"));
+const MovieDetails = React.lazy(() => import("./pages/MovieDetails"));
+const NotFound = React.lazy(() => import("./pages/NotFound"));
+const Watchlist = React.lazy(() => import("./pages/Watchlist"));
+const Header = React.lazy(() => import("./components/header"));
+
 function App() {
-  const [favMovies, setFavMovies] = useState("");
+  const [favMovies, setFavMovies] = useState([]);
   const dispatch = useDispatch();
   const counterVal = useSelector((state) => state.counter.value);
-
+  const clickedCards = useSelector((state) => state.counter.clickedId);
   const handleAddToFav = (id, title, image, date, clicked) => {
     dispatch(increment(counterVal + 1));
+    dispatch(clicked2(id));
     setFavMovies([
       ...favMovies,
       {
@@ -24,12 +34,12 @@ function App() {
         original_title: title,
         poster_path: image,
         release_date: date,
-        clicked: clicked
       },
     ]);
   };
-  const removeFromFav = (favID) => {
+  const removeFromFav = (favID, id) => {
     dispatch(decrement(counterVal - 1));
+    dispatch(unmark(id));
     const newArr = favMovies.filter((favMovie) => favMovie.favId !== favID);
     setFavMovies(newArr);
   };
@@ -38,20 +48,30 @@ function App() {
     <>
       <BrowserRouter>
         <Header />
-        <Routes>
-          <Route
-            path="/"
-            element={<MovieList handleAddToFav={handleAddToFav} favMovies={favMovies}/>}
-          />
-          <Route path="/moviedetails/:id" element={<MovieDetails />} />
-          <Route
-            path="/watchlist"
-            element={
-              <Watchlist favMovies={favMovies} removeFromFav={removeFromFav} />
-            }
-          />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<p>Loading...</p>}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <MovieList
+                  handleAddToFav={handleAddToFav}
+                  favMovies={favMovies}
+                />
+              }
+            />
+            <Route path="/moviedetails/:id" element={<MovieDetails />} />
+            <Route
+              path="/watchlist"
+              element={
+                <Watchlist
+                  favMovies={favMovies}
+                  removeFromFav={removeFromFav}
+                />
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </>
   );

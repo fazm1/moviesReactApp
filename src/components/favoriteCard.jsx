@@ -20,7 +20,7 @@ function FavoriteCard(props) {
         <div className="cardContent">
           <span className="movieTitle">{movieItem.original_title}</span> <br />
           <span className="movieDate">{movieItem.release_date}</span>
-          <span className="addToFav" onClick={() => removeFromFav(movieItem.favId)}>
+          <span className="addToFav" onClick={() => removeFromFav(movieItem.favId, movieItem.id)}>
             <img
               src="src/assets/heart-solid.svg"
               width="20px"
