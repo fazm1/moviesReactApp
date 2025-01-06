@@ -12,6 +12,7 @@ import viteLogo from "/vite.svg";
 
 import { useDispatch, useSelector } from "react-redux";
 import { decrement, increment, clicked2, unmark } from "./store/slices/counter";
+import LanguageContext from "./context/language";
 
 const MovieList = React.lazy(() => import("./pages/MovieList"));
 const MovieDetails = React.lazy(() => import("./pages/MovieDetails"));
@@ -51,6 +52,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+      <LanguageContext.Provider value={{ language, setLanguage }}>
       <div
           dir={language === "ar" ? "rtl" : "ltr"}
           className={language === "ar" ? "text-right" : "text-left"}
@@ -81,6 +83,7 @@ function App() {
           </Routes>
         </Suspense>
         </div>
+        </LanguageContext.Provider>
       </BrowserRouter>
     </>
   );
