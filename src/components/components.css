@@ -42,6 +42,7 @@
 }
 .addToFav{
     margin-left: 10px;
+    cursor:pointer;
 }
 .movieImage{
     width: 150px;

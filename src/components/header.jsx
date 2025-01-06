@@ -10,7 +10,7 @@ function Header() {
     <>
     <nav className="navbar navbar-expand-lg navbar-light bg-warning ">
         <Link className="navbar-brand mx-3" to="/">
-          MovieApp
+          {language === 'ar' ?"موڤي اپ":"MovieApp"}
         </Link>
         <button
           className="navbar-toggler"
@@ -27,14 +27,14 @@ function Header() {
           <ul className="navbar-nav mx-3">
             <li className="nav-item mt-2">
               <select name="lang" id="lang" defaultValue={"language"} onChange={(e)=>setLanguage(e.target.value)}>
-                <option value="en">EN</option>
-                <option value="ar">AR</option>
+                <option value="en">English</option>
+                <option value="ar">العربية</option>
               </select>
             </li>
 
             <li className="nav-item mx-3">
               <Link className="nav-link" to="/watchlist">
-               <img src="src/assets/heart-solid2.svg" width="20px" height="20px"/> watchlist <span className="counterNav">{counterVal}</span>
+               <img src="src/assets/heart-solid2.svg" width="20px" height="20px"/> {language === 'ar' ? "المفضلة":"watchlist"} <span className="counterNav">{counterVal}</span>
               </Link>
             </li>
           </ul>
