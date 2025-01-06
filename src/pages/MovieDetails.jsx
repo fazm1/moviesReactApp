@@ -13,7 +13,7 @@ function MovieDetails() {
       )
       .then((res) => setMovie(res.data))
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   return (
     <>
