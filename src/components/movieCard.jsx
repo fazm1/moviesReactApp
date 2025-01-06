@@ -20,7 +20,7 @@ function MovieCard(props) {
           className="movieImage"
         />
         <div className="cardContent">
-          <span className="movieTitle">{movieItem.original_title}</span> <br />
+          <span className="movieTitle">{movieItem.title}</span> <br />
           <span className="movieDate">{movieItem.release_date}</span>
           <span
             className="addToFav"
@@ -28,7 +28,7 @@ function MovieCard(props) {
               setClicked(true);
               handleAddToFav(
                 movieItem.id,
-                movieItem.original_title,
+                movieItem.title,
                 movieItem.poster_path,
                 movieItem.release_date,
               );

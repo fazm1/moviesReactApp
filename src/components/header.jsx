@@ -25,7 +25,7 @@ function Header() {
         </button>
         <div className="collapse navbar-collapse flex-row-reverse" id="navbarNavDropdown">
           <ul className="navbar-nav mx-3">
-            <li className="nav-item mt-1">
+            <li className="nav-item mt-2">
               <select name="lang" id="lang" defaultValue={"language"} onChange={(e)=>setLanguage(e.target.value)}>
                 <option value="en">EN</option>
                 <option value="ar">AR</option>
@@ -34,7 +34,7 @@ function Header() {
 
             <li className="nav-item mx-3">
               <Link className="nav-link" to="/watchlist">
-                watchlist <span className="counterNav">{counterVal}</span>
+               <img src="src/assets/heart-solid2.svg" width="20px" height="20px"/> watchlist <span className="counterNav">{counterVal}</span>
               </Link>
             </li>
           </ul>

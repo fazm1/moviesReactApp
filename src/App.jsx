@@ -1,6 +1,6 @@
 import React, { Suspense, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
-import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/css/bootstrap.min.css";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 
@@ -19,6 +19,7 @@ const MovieDetails = React.lazy(() => import("./pages/MovieDetails"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 const Watchlist = React.lazy(() => import("./pages/Watchlist"));
 const Header = React.lazy(() => import("./components/header"));
+const Search = React.lazy(() => import("./components/search"));
 
 function App() {
   const [favMovies, setFavMovies] = useState([]);
@@ -40,7 +41,6 @@ function App() {
         release_date: date,
       },
     ]);
-
   };
   const removeFromFav = (favID, id) => {
     dispatch(decrement(counterVal - 1));
@@ -52,37 +52,37 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      <LanguageContext.Provider value={{ language, setLanguage }}>
-      <div
-          dir={language === "ar" ? "rtl" : "ltr"}
-          className={language === "ar" ? "text-right" : "text-left"}
-        >
-        <Header />
-        <Suspense fallback={<p>Loading...</p>}>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <MovieList
-                  handleAddToFav={handleAddToFav}
-                  favMovies={favMovies}
+        <LanguageContext.Provider value={{ language, setLanguage }}>
+          <div
+            dir={language === "ar" ? "rtl" : "ltr"}
+            className={language === "ar" ? "text-right" : "text-left"}
+          >
+            <Header />
+            <Suspense fallback={<p>Loading...</p>}>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <MovieList
+                      handleAddToFav={handleAddToFav}
+                      favMovies={favMovies}
+                    />
+                  }
                 />
-              }
-            />
-            <Route path="/moviedetails/:id" element={<MovieDetails />} />
-            <Route
-              path="/watchlist"
-              element={
-                <Watchlist
-                  favMovies={favMovies}
-                  removeFromFav={removeFromFav}
+                <Route path="/moviedetails/:id" element={<MovieDetails />} />
+                <Route
+                  path="/watchlist"
+                  element={
+                    <Watchlist
+                      favMovies={favMovies}
+                      removeFromFav={removeFromFav}
+                    />
+                  }
                 />
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-        </div>
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </div>
         </LanguageContext.Provider>
       </BrowserRouter>
     </>
