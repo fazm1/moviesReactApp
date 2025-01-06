@@ -6,7 +6,7 @@
     position: relative;
 }
 
-.watchlist{
+/* .watchlist{
     float: right;
     text-decoration: none;
     color:black;
@@ -20,12 +20,12 @@
     text-decoration: none;
     color:black;
     margin-left: 15px;
-}
-#lang{
+} */
+/* #lang{
     position: absolute;
-    right: 10%;
+    right: 10%; 
     margin-top: 16px;
-}
+} */
 .movieCard{
     width: 180px;
     height: 340px; 

@@ -9,7 +9,7 @@ function MovieList(props) {
   useEffect(() => {
     axios
       .get(
-        "https://api.themoviedb.org/3/movie/popular?api_key=6592577093da51eb24594357289c921c"
+        import.meta.env.VITE_API_BASE_URL
       )
       .then((res) => setMovies(res.data.results))
       .catch((err) => console.log(err));

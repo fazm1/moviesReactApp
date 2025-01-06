@@ -1,5 +1,6 @@
 import React, { Suspense, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
+import "bootstrap/dist/css/bootstrap.min.css"
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 
@@ -23,6 +24,8 @@ function App() {
   const dispatch = useDispatch();
   const counterVal = useSelector((state) => state.counter.value);
   const clickedCards = useSelector((state) => state.counter.clickedId);
+  const [language, setLanguage] = useState("en");
+
   const handleAddToFav = (id, title, image, date, clicked) => {
     dispatch(increment(counterVal + 1));
     dispatch(clicked2(id));
@@ -36,6 +39,7 @@ function App() {
         release_date: date,
       },
     ]);
+
   };
   const removeFromFav = (favID, id) => {
     dispatch(decrement(counterVal - 1));
@@ -47,6 +51,10 @@ function App() {
   return (
     <>
       <BrowserRouter>
+      <div
+          dir={language === "ar" ? "rtl" : "ltr"}
+          className={language === "ar" ? "text-right" : "text-left"}
+        >
         <Header />
         <Suspense fallback={<p>Loading...</p>}>
           <Routes>
@@ -72,6 +80,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
+        </div>
       </BrowserRouter>
     </>
   );

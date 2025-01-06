@@ -9,7 +9,7 @@ function MovieDetails() {
   useEffect(() => {
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/${params.id}?api_key=6592577093da51eb24594357289c921c`
+        `${import.meta.env.VITE_API_BASE_URL2}${params.id}?api_key=${import.meta.env.VITE_API_KEY}`
       )
       .then((res) => setMovie(res.data))
       .catch((err) => console.log(err));
